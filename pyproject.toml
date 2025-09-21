@@ -1,4 +1,5 @@
 [project]
+package-mode = false
 name = "skyscraper-smackdown"
 version = "0.1.0"
 description = "Project for PyWeek 40 by Dev-ilish team"
