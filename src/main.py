@@ -1,5 +1,4 @@
 import arcade
-from game.objects.debris import Debris
 from game.systems.debris_generator import DebrisGenerator
 
 # Constants
@@ -16,8 +15,7 @@ class GameView(arcade.Window):
 
         self.background_color = arcade.csscolor.CORNFLOWER_BLUE
 
-        # self.debris_generator = DebrisGenerator()
-        self.debris = Debris()
+        self.debris_generator = DebrisGenerator()
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -31,13 +29,12 @@ class GameView(arcade.Window):
         # set to. This ensures that you have a clean slate for drawing each
         # frame of the game.
         self.clear()
-        # self.debris_generator.draw()
-        self.debris.draw()
+        self.debris_generator.draw()
+        # self.debris.draw()
 
         # Code to draw other things will go here
     def on_update(self, delta_time: float) -> None:
-        # self.debris_generator.update(delta_time)
-        self.debris.on_update(delta_time)
+        self.debris_generator.on_update(delta_time)
 
 
 def main():
