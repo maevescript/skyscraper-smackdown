@@ -58,7 +58,7 @@ class GameView(arcade.Window):
         # Code to draw other things will go here
 
     def on_update(self, delta_time: float) -> None:
-        self.debris_generator.on_update(delta_time)
+        self.debris_generator.on_update(delta_time, self.player.get_lane())
         
     def on_key_press(self, key, modifiers):
         if key == arcade.key.LEFT:

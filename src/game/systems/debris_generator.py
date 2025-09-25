@@ -5,7 +5,7 @@ import time
 from game.objects.debris import Debris
 
 class DebrisGenerator:
-    def __init__(self, min_interval=1.0, max_interval=5.0, screen_width=1280, screen_height=720, lanes = 7):
+    def __init__(self, min_interval=1.0, max_interval=3.0, screen_width=1280, screen_height=720, lanes = 7):
         self.min_interval = min_interval
         self.max_interval = max_interval
         self.screen_width = screen_width
