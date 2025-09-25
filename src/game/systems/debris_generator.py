@@ -45,12 +45,8 @@ class DebrisGenerator:
     def draw(self):
         for debris in self.debris_list:
             debris.draw()
-            # arcade.draw_circle_filled(
-            #     debris['x'], 
-            #     debris['y'], 
-            #     debris['radius'], 
-            #     debris['color']
-            # )
+    
+        self.debris_list = [debris for debris in self.debris_list if debris.get_position()[0] >= 100]
     
     def clear_debris(self):
         self.debris_list.clear()
