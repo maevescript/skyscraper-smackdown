@@ -11,7 +11,7 @@ class DebrisGenerator:
         self.screen_width = screen_width
         self.screen_height = screen_height
         
-        self.debris_list = []  # List to store all debris circles
+        self.debris_list = arcade.SpriteList()
         self.last_spawn_time = time.time()
         self.next_spawn_delay = random.uniform(self.min_interval, self.max_interval)
         
@@ -43,14 +43,7 @@ class DebrisGenerator:
         self.debris_list.append(debris)
     
     def draw(self):
-        for debris in self.debris_list:
-            debris.draw()
-            # arcade.draw_circle_filled(
-            #     debris['x'], 
-            #     debris['y'], 
-            #     debris['radius'], 
-            #     debris['color']
-            # )
+        self.debris_list.draw()
     
     def clear_debris(self):
         self.debris_list.clear()

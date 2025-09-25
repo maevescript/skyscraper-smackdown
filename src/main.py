@@ -10,7 +10,6 @@ WINDOW_TITLE = "Skyscraper Smackdown"
 LANE_COUNT = 7
 LANE_WIDTH = WINDOW_WIDTH / LANE_COUNT
 
-
 class GameView(arcade.Window):
     def __init__(self):
         # Call the parent class to set up the window
@@ -20,7 +19,9 @@ class GameView(arcade.Window):
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
 
-        self.debris_generator = DebrisGenerator()
+        self.debris_generator = DebrisGenerator(
+            screen_width=WINDOW_WIDTH, screen_height=WINDOW_HEIGHT
+        )
 
         self.lanes = []
         for i in range(LANE_COUNT):
@@ -59,7 +60,16 @@ class GameView(arcade.Window):
 
     def on_update(self, delta_time: float) -> None:
         self.debris_generator.on_update(delta_time)
+
+        hits = arcade.check_for_collision_with_list(
+            self.player, self.debris_generator.debris_list
+        )
         
+        for debris in hits:
+            self.player.take_damage(10)
+            print(f"Player took damage: {self.player.health}")
+            debris.remove_from_sprite_lists()
+
     def on_key_press(self, key, modifiers):
         if key == arcade.key.LEFT:
             self.player.move_left()
@@ -68,6 +78,7 @@ class GameView(arcade.Window):
 
 
 def main():
+    print(f"Arcade V{arcade.__version__}")
     """Main function"""
     window = GameView()
     window.setup()
