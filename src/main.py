@@ -33,8 +33,8 @@ class GameView(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.SPACE:
-            BuildingTiles.drawNewFloor(self)
             BuildingTiles.destroyLowestFloor(self)
+            BuildingTiles.drawNewFloor(self)
             
             
 def main():
