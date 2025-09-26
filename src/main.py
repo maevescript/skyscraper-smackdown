@@ -68,8 +68,6 @@ class GameView(arcade.Window):
         self.clear()
         BuildingTiles.drawStartBuild(self)
     
-    def on_update(self, delta_time):
-
         self.physics_engine.step()
 
     def on_key_press(self, key, modifiers):
