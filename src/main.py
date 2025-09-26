@@ -74,6 +74,11 @@ class GameView(arcade.Window):
         if key == arcade.key.SPACE:
             BuildingTiles.destroyLowestFloor(self)
             BuildingTiles.drawNewFloor(self)
+        
+        if key == arcade.key.LEFT:
+            self.player.move_left()
+        elif key == arcade.key.RIGHT:
+            self.player.move_right()
             
             
 def main():
