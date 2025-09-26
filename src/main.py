@@ -2,11 +2,9 @@ import arcade
 from building import BuildingTiles
 
 # Constants
-WINDOW_WIDTH = 1280
+WINDOW_WIDTH = 1344
 WINDOW_HEIGHT = 720
 WINDOW_TITLE = "Skyscraper Smackdown"
-
-
 
 class GameView(arcade.Window):
     def __init__(self):
@@ -36,14 +34,9 @@ class GameView(arcade.Window):
     def on_key_press(self, key, modifiers):
         if key == arcade.key.SPACE:
             BuildingTiles.drawNewFloor(self)
-            if self.sprite_list[1]:  
-                self.physics_engine.remove_sprite(self.sprite_list[1])
-                self.sprite_list[1].remove_from_sprite_lists()
-                self.sprite_list[1] = None
+            BuildingTiles.destroyLowestFloor(self)
             
             
-
-
 def main():
     """Main function"""
     window = GameView()
