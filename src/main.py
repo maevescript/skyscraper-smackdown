@@ -44,6 +44,8 @@ class GameView(arcade.Window):
         # set to. This ensures that you have a clean slate for drawing each
         # frame of the game.
         self.clear()
+        
+        BuildingTiles.drawStartBuild(self)
         self.debris_generator.draw()
 
         # Para mostrar las lineas de los carriles
@@ -59,16 +61,17 @@ class GameView(arcade.Window):
 
         self.player.draw()
         # self.debris.draw()
-
         # Code to draw other things will go here
 
     def on_update(self, delta_time: float) -> None:
+        self.clear()
+        self.physics_engine.step()
         self.debris_generator.on_update(delta_time, self.player.get_lane())
         
-        self.clear()
-        BuildingTiles.drawStartBuild(self)
+        
+        
     
-        self.physics_engine.step()
+        
 
     def on_key_press(self, key, modifiers):
         if key == arcade.key.SPACE:
