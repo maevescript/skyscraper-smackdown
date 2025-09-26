@@ -22,7 +22,7 @@ class GameView(arcade.Window):
 
         self.sprite_list = arcade.SpriteList()
         self.physics_engine = arcade.PymunkPhysicsEngine(gravity=(0, -900))
-        self.debris_generator = DebrisGenerator()
+        self.debris_generator = DebrisGenerator(1.0, 3.0, WINDOW_WIDTH, WINDOW_HEIGHT, LANE_COUNT)
 
         BuildingTiles.GenerateFloor(self)
         BuildingTiles.StartUpBuilding(self)
