@@ -16,11 +16,13 @@ class GameView(arcade.Window):
 
         super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
         self.sprite_list = None
+        self.debris_sprite_list = None
         self.physics_engine = None
 
     def setup(self):
 
         self.sprite_list = arcade.SpriteList()
+        self.debris_sprite_list = arcade.SpriteList()
         self.physics_engine = arcade.PymunkPhysicsEngine(gravity=(0, -900))
         self.debris_generator = DebrisGenerator(1.0, 3.0, WINDOW_WIDTH, WINDOW_HEIGHT, LANE_COUNT)
 
@@ -40,8 +42,9 @@ class GameView(arcade.Window):
         self.clear()
         
         self.sprite_list.draw()
+        self.debris_sprite_list.draw()
         # BuildingTiles.drawStartBuild(self)
-        self.debris_generator.draw(self.sprite_list)
+        self.debris_generator.draw(self.debris_sprite_list)
 
         # Para mostrar las lineas de los carriles
         # for lane in self.lanes:
@@ -61,11 +64,7 @@ class GameView(arcade.Window):
     def on_update(self, delta_time: float) -> None:
         self.clear()
         self.physics_engine.step()
-        self.debris_generator.on_update(self.sprite_list, delta_time, self.player.get_lane())
-        
-        
-        
-    
+        self.debris_generator.on_update(self.debris_sprite_list, delta_time, self.player.get_lane())
         
 
     def on_key_press(self, key, modifiers):

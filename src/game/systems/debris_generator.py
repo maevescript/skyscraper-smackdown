@@ -44,7 +44,8 @@ class DebrisGenerator:
             debris.draw()
     
         self.debris_list = [debris for debris in self.debris_list if debris.get_position()[1] >= 100]
-        # sprite_list = [debris for debris in sprite_list if debris.center_y >= 100]
+        if len(sprite_list) > 0 and sprite_list[0].center_y < 100:
+            sprite_list.remove(sprite_list[0])
     
     def clear_debris(self):
         self.debris_list.clear()
