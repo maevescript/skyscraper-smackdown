@@ -1,26 +1,32 @@
 import arcade
+from building import BuildingTiles
+from game.objects.player import Player
 from game.systems.debris_generator import DebrisGenerator
 from game.world.lane import Lane
-from game.objects.player import Player
 
 # Constants
-WINDOW_WIDTH = 1280
+WINDOW_WIDTH = 1344
 WINDOW_HEIGHT = 720
 WINDOW_TITLE = "Skyscraper Smackdown"
 LANE_COUNT = 7
 LANE_WIDTH = WINDOW_WIDTH / LANE_COUNT
 
-
 class GameView(arcade.Window):
     def __init__(self):
-        # Call the parent class to set up the window
+
         super().__init__(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
-        self.background_color = arcade.csscolor.CORNFLOWER_BLUE
+        self.sprite_list = None
+        self.physics_engine = None
 
     def setup(self):
-        """Set up the game here. Call this function to restart the game."""
 
-        self.debris_generator = DebrisGenerator()
+        self.sprite_list = arcade.SpriteList()
+        self.physics_engine = arcade.PymunkPhysicsEngine(gravity=(0, -900))
+        self.debris_generator = DebrisGenerator(1.0, 3.0, WINDOW_WIDTH, WINDOW_HEIGHT, LANE_COUNT)
+
+        BuildingTiles.GenerateFloor(self)
+        BuildingTiles.StartUpBuilding(self)
+
 
         self.lanes = []
         for i in range(LANE_COUNT):
@@ -29,7 +35,6 @@ class GameView(arcade.Window):
 
         self.player = Player(self.lanes, LANE_WIDTH, LANE_WIDTH, 100)
 
-        pass
 
     def on_draw(self):
         """Render the screen."""
@@ -39,6 +44,8 @@ class GameView(arcade.Window):
         # set to. This ensures that you have a clean slate for drawing each
         # frame of the game.
         self.clear()
+        
+        BuildingTiles.drawStartBuild(self)
         self.debris_generator.draw()
 
         # Para mostrar las lineas de los carriles
@@ -54,19 +61,29 @@ class GameView(arcade.Window):
 
         self.player.draw()
         # self.debris.draw()
-
         # Code to draw other things will go here
 
     def on_update(self, delta_time: float) -> None:
-        self.debris_generator.on_update(delta_time)
+        self.clear()
+        self.physics_engine.step()
+        self.debris_generator.on_update(delta_time, self.player.get_lane())
         
+        
+        
+    
+        
+
     def on_key_press(self, key, modifiers):
+        if key == arcade.key.SPACE:
+            BuildingTiles.destroyLowestFloor(self)
+            BuildingTiles.drawNewFloor(self)
+        
         if key == arcade.key.LEFT:
             self.player.move_left()
         elif key == arcade.key.RIGHT:
             self.player.move_right()
-
-
+            
+            
 def main():
     """Main function"""
     window = GameView()

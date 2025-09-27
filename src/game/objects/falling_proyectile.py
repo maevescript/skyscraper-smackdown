@@ -9,6 +9,7 @@ class FallingProyectile(ABC):
         self.radius = 0
         self.color = arcade.color.GRAY
         self.change_y = 0
+        self.lanes = 0
     
     def get_speed(self):
         return self.speed

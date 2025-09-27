@@ -35,3 +35,6 @@ class Player(arcade.Sprite):
         arcade.draw_lbwh_rectangle_filled(
             self.center_x, self.center_y, self.width, self.height, self.color
         )
+
+    def get_lane(self):
+        return self.current_lane
