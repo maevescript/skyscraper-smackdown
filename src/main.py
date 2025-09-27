@@ -37,27 +37,21 @@ class GameView(arcade.Window):
 
 
     def on_draw(self):
-        """Render the screen."""
-
-        # The clear method should always be called at the start of on_draw.
-        # It clears the whole screen to whatever the background color is
-        # set to. This ensures that you have a clean slate for drawing each
-        # frame of the game.
         self.clear()
         
         BuildingTiles.drawStartBuild(self)
         self.debris_generator.draw()
 
         # Para mostrar las lineas de los carriles
-        for lane in self.lanes:
-            arcade.draw_line(
-                lane.x_center - LANE_WIDTH // 2,
-                0,
-                lane.x_center - LANE_WIDTH // 2,
-                WINDOW_HEIGHT,
-                arcade.color.GRAY,
-                2,
-            )
+        # for lane in self.lanes:
+        #     arcade.draw_line(
+        #         lane.x_center - LANE_WIDTH // 2,
+        #         0,
+        #         lane.x_center - LANE_WIDTH // 2,
+        #         WINDOW_HEIGHT,
+        #         arcade.color.GRAY,
+        #         2,
+        #     )
 
         self.player.draw()
         # self.debris.draw()
