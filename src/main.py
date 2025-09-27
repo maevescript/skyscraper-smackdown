@@ -39,8 +39,9 @@ class GameView(arcade.Window):
     def on_draw(self):
         self.clear()
         
-        BuildingTiles.drawStartBuild(self)
-        self.debris_generator.draw()
+        self.sprite_list.draw()
+        # BuildingTiles.drawStartBuild(self)
+        self.debris_generator.draw(self.sprite_list)
 
         # Para mostrar las lineas de los carriles
         # for lane in self.lanes:
@@ -60,7 +61,7 @@ class GameView(arcade.Window):
     def on_update(self, delta_time: float) -> None:
         self.clear()
         self.physics_engine.step()
-        self.debris_generator.on_update(delta_time, self.player.get_lane())
+        self.debris_generator.on_update(self.sprite_list, delta_time, self.player.get_lane())
         
         
         

@@ -18,30 +18,33 @@ class DebrisGenerator:
         
         self.radius = 40
     
-    def on_update(self, delta_time, lane = 0):
+    def on_update(self,sprite_list, delta_time, lane = 0):
         current_time = time.time()
         
         if current_time - self.last_spawn_time >= self.next_spawn_delay:
-            self.spawn_debris(lane)
+            self.spawn_debris(lane, sprite_list)
             self.last_spawn_time = current_time
             self.next_spawn_delay = random.uniform(self.min_interval, self.max_interval)
 
         for debris in self.debris_list:
-            debris.on_update(delta_time)
+            # debris.on_update(delta_time)
+            debris.sprite.center_y -= 120 * delta_time
     
-    def spawn_debris(self, lane):
+    def spawn_debris(self, lane, sprite_list):
         # x = random.randint(self.radius, self.screen_width - self.radius)
         x = self.get_middle_lane_point(lane)
         y = self.screen_height - self.radius
         debris = Debris(x, y, 120, self.radius, arcade.color.AO)
         
         self.debris_list.append(debris)
+        sprite_list.append(debris.get_sprite())
     
-    def draw(self):
+    def draw(self, sprite_list):
         for debris in self.debris_list:
             debris.draw()
     
         self.debris_list = [debris for debris in self.debris_list if debris.get_position()[1] >= 100]
+        # sprite_list = [debris for debris in sprite_list if debris.center_y >= 100]
     
     def clear_debris(self):
         self.debris_list.clear()

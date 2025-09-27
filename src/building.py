@@ -73,9 +73,9 @@ class BuildingTiles ():
                 )
 
 
-    def drawStartBuild(self):
-        self.sprite_list.draw()
-        print
+    # def drawStartBuild(self):
+    #     self.sprite_list.draw()
+    #     print
         
     def drawNewFloor(self):
         

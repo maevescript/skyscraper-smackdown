@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 
 class FallingProyectile(ABC):
     def __init__(self):
-        self.center_x = 0
-        self.center_y = 0
+        self.sprite.center_x = 0
+        self.sprite.center_y = 0
         self.speed = 0
         self.radius = 0
         self.color = arcade.color.GRAY
@@ -19,10 +19,11 @@ class FallingProyectile(ABC):
         self.change_y = -new_speed
     
     def on_update(self, delta_time: float):
-        self.center_y += self.change_y * delta_time
+        # self.sprite.center_y += self.sprite.change_y * delta_time
+        pass
     
     def get_position(self):
-        return (self.center_x, self.center_y)
+        return (self.sprite.center_x, self.sprite.center_y)
     
     @abstractmethod
     def draw(self):
