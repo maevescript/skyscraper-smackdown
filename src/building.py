@@ -1,7 +1,7 @@
 import arcade
 import random
 block_type = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
+tile_life_points = [5,5,5,5,5]
 class BuildingTiles ():
     def __init__(self):
 
@@ -74,7 +74,7 @@ class BuildingTiles ():
 
 
     def drawNewFloor(self):
-        
+        tile_life_points = [5,5,5,5,5]
         coordinate_list = [[288, 1500], [480, 1550], [672, 1600], [864, 1650], [1056, 1700]]
         for index, coordinate in enumerate(coordinate_list):
             
@@ -102,7 +102,7 @@ class BuildingTiles ():
                 block_type.append(1)
 
             
-            print(f"Iteration {index}: coordinate = {block_type}")    
+             
             self.build.center_x = coordinate[0]
             self.build.center_y = coordinate[1]
             self.sprite_list.append(self.build)
@@ -115,6 +115,7 @@ class BuildingTiles ():
                 body_type=arcade.PymunkPhysicsEngine.DYNAMIC,
                 moment_of_inertia=arcade.PymunkPhysicsEngine.MOMENT_INF 
             )
+        print(f"Iteration {index}: coordinate = {block_type}")   
 
     def destroyLowestFloor(self):
         self.physics_engine.remove_sprite(self.sprite_list[5])
@@ -133,7 +134,32 @@ class BuildingTiles ():
         self.sprite_list.remove(self.sprite_list[1])
         
         del block_type[:5]
+
         
-def checkIfCrystalFloor(self):
-    pass
+    def checkIfCrystalFloor(self):
+        pass
+
+    def lowestFloorLifeCount(self,tile):
+        if(tile == 0):
+            tile_life_points[tile] = tile_life_points[tile] -1
+        elif(tile == 1):
+            tile_life_points[tile] = tile_life_points[tile] -1
+        elif(tile == 2):
+            tile_life_points[tile] = tile_life_points[tile] -1
+        elif(tile == 3):
+            tile_life_points[tile] = tile_life_points[tile] -1
+        elif(tile == 4):
+            tile_life_points[tile] = tile_life_points[tile] -1
+
+        print(f"{tile_life_points}")
+
+        if all(x <= 0 for x in tile_life_points):
+            BuildingTiles.destroyLowestFloor(self)
+            BuildingTiles.drawNewFloor(self)
+            tile_life_points[0] = 5
+            tile_life_points[1] = 5
+            tile_life_points[2] = 5
+            tile_life_points[3] = 5
+            tile_life_points[4] = 5
+
         

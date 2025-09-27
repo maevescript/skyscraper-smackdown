@@ -64,9 +64,19 @@ class GameView(arcade.Window):
         
 
     def on_key_press(self, key, modifiers):
-        if key == arcade.key.SPACE:
-            BuildingTiles.destroyLowestFloor(self)
-            BuildingTiles.drawNewFloor(self)
+        if key == arcade.key.NUM_1:
+            BuildingTiles.lowestFloorLifeCount(self,0)
+        if key == arcade.key.NUM_2:
+            BuildingTiles.lowestFloorLifeCount(self,1)
+        if key == arcade.key.NUM_3:
+            BuildingTiles.lowestFloorLifeCount(self,2)
+        if key == arcade.key.NUM_4:
+            BuildingTiles.lowestFloorLifeCount(self,3)
+        if key == arcade.key.NUM_5:
+            BuildingTiles.lowestFloorLifeCount(self,4)
+        
+        #BuildingTiles.destroyLowestFloor(self)
+        #BuildingTiles.drawNewFloor(self)
         
         if key == arcade.key.LEFT:
             self.player.move_left()
