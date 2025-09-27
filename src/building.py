@@ -73,10 +73,6 @@ class BuildingTiles ():
                 )
 
 
-    # def drawStartBuild(self):
-    #     self.sprite_list.draw()
-    #     print
-        
     def drawNewFloor(self):
         
         coordinate_list = [[288, 1500], [480, 1550], [672, 1600], [864, 1650], [1056, 1700]]
